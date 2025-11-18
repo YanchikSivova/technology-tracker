@@ -1,0 +1,70 @@
+:root{
+    --color-not-started:#e74c3c; --color-in-progress:#f39c12; --color-completed:#27AE60;
+    --color-title:#22313f; --color-primary:#36454f;
+    --color-background:#FFFFFF; --color-cards:#ecf0f1;
+
+    --font-primary: 'Montserrat';
+    --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+
+.technologies-list{
+    margin: 20px;
+}
+
+.technologies-list h2{
+    color: var(--color-title);
+}
+
+.technologies-list ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    gap: 20px;
+    padding: 0;
+}
+
+.technologies-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-cards);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.not-started{
+    border: 2px solid var(--color-not-started);
+    outline: 1px solid var(--color-not-started);
+    outline-offset: 3px;
+}
+
+.in-progress{
+    border: 2px solid var(--color-in-progress);
+    outline: 1px solid var(--color-in-progress);
+    outline-offset: 3px;
+}
+
+.completed{
+    border: 2px solid var(--color-completed);
+    outline: 1px solid var(--color-completed);
+    outline-offset: 3px;
+}
+
+.technologies-list h3{
+    margin: 0;
+    margin-bottom: 0.5em;
+    color: var(--color-title);
+}
+
+.description{
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-primary);
+}
+
+.status-icon{
+    margin: 0;
+    font-size: 32px;
+}

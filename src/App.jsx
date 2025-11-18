@@ -1,9 +1,26 @@
 import './App.css';
+import './components/TechnologyCard.css';
+import './components/ProgressHeader.css';
+import TechnologyCard from './components/TechnologyCard';
+import ProgressHeader from './components/ProgressHeader';
 function App() {
-return (
-<div className="App">
-<h1>Моё React приложение</h1>
-</div>
-);
+  const technologies = [
+    {
+      id: 1, title: 'React Components', description: 'Изучение базовых компонентов',
+      status: 'completed'
+    },
+    {
+      id: 2, title: 'JSX Syntax', description: 'Освоение синтаксиса JSX', status:
+        'in-progress'
+    },
+    {
+      id: 3, title: 'State Management', description: 'Работа с состоянием компонентов', status: 'not-started' }
+    ];
+  return (
+    <div className="App">
+      <ProgressHeader technologies={technologies}/>
+      <TechnologyCard technologies={technologies}/>
+    </div>
+  );
 }
 export default App;
