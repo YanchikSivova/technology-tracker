@@ -1,12 +1,3 @@
-:root{
-    --color-not-started:#e74c3c; --color-in-progress:#f39c12; --color-completed:#27AE60;
-    --color-title:#22313f; --color-primary:#36454f;
-    --color-background:#FFFFFF; --color-cards:#ecf0f1;
-
-    --font-primary: 'Montserrat';
-    --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
 
 .technologies-list{
     margin: 20px;

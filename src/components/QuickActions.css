@@ -1,0 +1,22 @@
+.quick-actions{
+    display: flex;
+    align-self: center;
+    gap: 20px;
+}
+
+.quick-actions button{
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 8px 24px;
+    border: none;
+    color: var(--color-background);
+    box-shadow: var(--shadow);
+}
+
+.complete-button{
+    background-color: var(--color-completed);
+}
+
+.reset-button{
+    background-color: var(--color-not-started);
+}

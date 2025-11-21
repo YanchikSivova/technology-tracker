@@ -1,0 +1,22 @@
+.filter-dropdown{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-label{
+    color: var(--color-title);
+    white-space: nowrap;
+}
+
+.filter-select{
+    background-color: var(--color-background);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    color: var(--color-primary);
+}
+
+.filter-select option{
+    padding: 8px;
+    background-color: var(--color-cards);
+}
