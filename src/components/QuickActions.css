@@ -2,6 +2,8 @@
     display: flex;
     align-self: center;
     gap: 20px;
+    margin: 20px;
+    margin-bottom: 0;
 }
 
 .quick-actions button{

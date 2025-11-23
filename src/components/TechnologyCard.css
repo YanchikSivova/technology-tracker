@@ -17,12 +17,11 @@
 }
 
 .technologies-list li{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: var(--color-cards);
-    border-radius: 8px;
+    border-radius: var(--radius);
     padding: 8px;
+
+    transition: all 0.25s ease;
 }
 
 .not-started{
@@ -43,6 +42,12 @@
     outline-offset: 3px;
 }
 
+.card-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .technologies-list h3{
     margin: 0;
     margin-bottom: 0.5em;
@@ -58,4 +63,16 @@
 .status-icon{
     margin: 0;
     font-size: 32px;
+}
+
+.notes-delete__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delete-button{
+    margin: 0;
+    font-size: 32px;
+    align-self: end;
 }

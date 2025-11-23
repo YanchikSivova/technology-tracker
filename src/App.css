@@ -27,14 +27,13 @@ body {
     font-family: var(--font-primary), var(--font-fallback);
     font-size: 16px;
     line-height: 1.5rem;
+    color: var(--color-primary);
 }
 .App {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary), var(--font-fallback);
 }
 
 /* стили для заголовка приложения (если используется) */
@@ -59,4 +58,18 @@ body {
 
 .App-link:hover {
   text-decoration: underline;
+}
+
+.search-box{
+  margin: 20px;
+  margin-bottom: 0;
+}
+
+.search-box input{
+  border-radius: var(--radius);
+  padding: 8px 16px;
+}
+
+.search-box span{
+  margin-left: 16px;
 }

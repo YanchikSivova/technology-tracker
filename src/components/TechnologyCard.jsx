@@ -1,6 +1,7 @@
 import './TechnologyCard.css';
+import TechnologyNotes from './TechnologyNotes';
 
-function TechnologyCard({ technologies, onStatusChange, onDeleteTechnology }) {
+function TechnologyCard({ technologies, onStatusChange, onDeleteTechnology, onNotesChange }) {
 
     const handleStatusClick = (id) => {
         const statusOrder = ['not-started', 'in-progress', 'completed'];
@@ -19,15 +20,22 @@ function TechnologyCard({ technologies, onStatusChange, onDeleteTechnology }) {
             <h2>Список технологий</h2>
             <ul>
                 {technologies.map(technology => (
-                    <li key={technology.id} className={technology.status} onClick={() => handleStatusClick(technology.id)} style={{ cursor: 'pointer' }}>
-                        <span>
-                            <h3>{technology.title}</h3>
-                            <p className="description">{technology.description}</p>
-                        </span>
-                        <div className="card-controls">
-                            <p className="status-icon">
-                                {technology.status === 'not-started' ? '❌' : (technology.status === 'completed' ? '✅' : '⌛️')}
-                            </p>
+                    <li key={technology.id} className={technology.status} onClick={() => handleStatusClick(technology.id)} style={{ cursor: 'pointer' }}    >
+                        <div className='card-content'>
+                            <span>
+                                <h3>{technology.title}</h3>
+                                <p className="description">{technology.description}</p>
+                            </span>
+                            <div className="status-icon">
+                                    {technology.status === 'not-started' ? '❌' : (technology.status === 'completed' ? '✅' : '⌛️')}
+                            </div>
+                        </div>
+                        <div className='notes-delete__container'>
+                            <TechnologyNotes
+                                notes={technology.notes}
+                                onNotesChange={onNotesChange}
+                                techId={technology.id}
+                            />
                             <button className="delete-button" onClick={(e) => handleDeleteClick(technology.id, e)} title="Удалить технологию">
                                 🗑️
                             </button>

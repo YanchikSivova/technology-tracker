@@ -1,0 +1,19 @@
+.notes-section{
+    margin-top: 16px;
+}
+
+.notes-section textarea{
+    padding: 8px 12px;
+    border-radius: var(--radius);
+}
+
+.notes-section h4{
+    margin: 0;
+    color: var(--color-title);
+    font-weight: 600;
+}
+
+.notes-hint{
+    color: var(--color-primary);
+    font-family: var(--font-primary), var(--font-fallback);
+}
