@@ -1,21 +1,17 @@
 import './ProgressHeader.css'
 
-function ProgressHeader({ technologies }) {
-    const completedCount = technologies.filter(technology => technology.status === 'completed').length;
-    const totalCount = technologies.length;
-    const progressPercentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+function ProgressHeader({ progress, label, animated = true }) {
+    
     return (
         <div className="progress-header">
-            <h2>Прогресс изучения</h2>
+            {label && <div className='progress-label'>{label}</div>}
             <div className="progress-bar">
-                <div className="progress-fill" style={{ width: `${progressPercentage}%` }}></div>
-            </div>
-            <div className="progress-stats">
-                <p>Выполнено: {completedCount} из {totalCount}</p>
-                <p>{progressPercentage}%</p>
+                <div className={`progress-fill ${animated? 'animated' : ''}`} style={{ width: `${progress}%` }}>
+                    <span className='progress-text'>{progress}%</span>
+                </div>
             </div>
         </div>
     );
 }
 
-export default ProgressHeader
+export default ProgressHeader;
