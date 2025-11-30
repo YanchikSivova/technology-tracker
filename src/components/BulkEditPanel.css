@@ -1,0 +1,71 @@
+#bulk-edit-title{
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.selection-actions{
+    display: flex;
+    gap: 8px;
+}
+
+.selection-button{
+    border-radius: var(--radius);
+    padding: 8px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow);
+    margin-top: 8px;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.bulk-edit-form{
+    margin-top: 20px;
+}
+
+.form-header{
+    font-weight: 500;
+}
+
+.status-options{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.status-bulk-icon{
+    font-size: 20px;
+}
+
+.bulk-actions{
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.apply-button,
+.cancel-bulk-button{
+    border-radius: var(--radius);
+    padding: 8px;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow);
+    margin-top: 8px;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.apply-button:disabled{
+    background-color: none;
+    box-shadow: none;
+    cursor: default;
+}
+
+.bulk-edit-hint{
+    margin-top: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}

@@ -3,13 +3,13 @@
     margin-bottom: 0;
 }
 
-.action-buttons{
-    /* display: flex;
-    align-self: center;
-    justify-content: space-between; */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.action-buttons, 
+.export-import-buttons{
+    display: flex;
     gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
 }
 
 .quick-actions button{
@@ -17,8 +17,9 @@
     font-size: 18px;
     padding: 8px 24px;
     border: none;
-    color: var(--color-background);
     box-shadow: var(--shadow);
+    width: 383px;
+    color: var(--color-background);
 }
 
 .complete-button{
@@ -27,12 +28,11 @@
 
 .reset-button{
     background-color: var(--color-not-started);
+    
 }
 
-.export-button{
-    background-color: var(--color-in-progress);
-}
-
-.action-buttons button:last-child{
+.export-button,
+.import-button,
+.api-button{
     background-color: var(--color-in-progress);
 }
