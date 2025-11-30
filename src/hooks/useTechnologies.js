@@ -76,7 +76,7 @@ const transformToRussianTech = (post, index) => {
         { latin: 'architecto', tech: 'Kubernetes', category: 'devops' },
         { latin: 'blanditiis', tech: 'Webpack', category: 'tools' }
     ];
-    
+
 
     // Находим подходящую технологию по словам из title
     const titleWords = post.title.toLowerCase().split(' ');
@@ -115,19 +115,19 @@ const transformToRussianTech = (post, index) => {
     };
 };
 
-    function useTechnologies() {
-        const [technologies, setTechnologies] = useLocalStorage('technologies', initialTechnologies);
-        const [apiLoading, setApiLoading] = useState(false);
-        const [apiError, setApiError] = useState(null);
+function useTechnologies() {
+    const [technologies, setTechnologies] = useLocalStorage('technologies', initialTechnologies);
+    const [apiLoading, setApiLoading] = useState(false);
+    const [apiError, setApiError] = useState(null);
 
-        const importFromApi = useCallback(async () => {
+    const importFromApi = useCallback(async () => {
         try {
             setApiLoading(true);
             setApiError(null);
 
             // Используем JSONPlaceholder API
             const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4');
-            
+
             if (!response.ok) {
                 throw new Error(`Ошибка API: ${response.status}`);
             }
@@ -150,7 +150,7 @@ const transformToRussianTech = (post, index) => {
 
             // Добавляем новые технологии
             setTechnologies(prev => [...prev, ...newTechnologies]);
-            
+
             return newTechnologies.length;
 
         } catch (err) {
@@ -162,64 +162,70 @@ const transformToRussianTech = (post, index) => {
         }
     }, [technologies, setTechnologies]);
 
-        const handleAddTechnology = (newTech) => {
-            setTechnologies(prevTech => [...prevTech, {
-                ...newTech,
-                id: Date.now()
-            }]);
-        };
+    const handleAddTechnology = (newTech) => {
+        setTechnologies(prevTech => [...prevTech, {
+            ...newTech,
+            id: Date.now()
+        }]);
+    };
 
-        const handleStatusChange = (id, newStatus) => {
-            setTechnologies(prevTech =>
-                prevTech.map(tech =>
-                    tech.id === id ? { ...tech, status: newStatus } : tech
-                )
-            );
-        };
-
-        const updateTechnologyNotes = (techId, newNotes) => {
-            setTechnologies(prevTech => prevTech.map(tech =>
-                tech.id === techId ? { ...tech, notes: newNotes } : tech
+    const handleStatusChange = (id, newStatus) => {
+        setTechnologies(prevTech =>
+            prevTech.map(tech =>
+                tech.id === id ? { ...tech, status: newStatus } : tech
             )
-            );
-        };
+        );
+    };
 
-        const handleDeleteTechnology = (id) => {
-            setTechnologies(prevTech => prevTech.filter(tech => tech.id !== id));
-        };
+    const updateTechnologyNotes = (techId, newNotes) => {
+        setTechnologies(prevTech => prevTech.map(tech =>
+            tech.id === techId ? { ...tech, notes: newNotes } : tech
+        )
+        );
+    };
 
-        const handleResetAll = () => {
-            setTechnologies(prevTech =>
-                prevTech.map(tech => ({ ...tech, status: 'not-started' }))
-            );
-        };
+    const handleDeleteTechnology = (id) => {
+        setTechnologies(prevTech => prevTech.filter(tech => tech.id !== id));
+    };
 
-        const handleCompleteAll = () => {
-            setTechnologies(prevTech =>
-                prevTech.map(tech => ({ ...tech, status: 'completed' }))
-            )
-        };
+    const handleResetAll = () => {
+        setTechnologies(prevTech =>
+            prevTech.map(tech => ({ ...tech, status: 'not-started' }))
+        );
+    };
 
-        const calculateProgress = () => {
-            if (technologies.length === 0) return 0;
-            const completed = technologies.filter(tech => tech.status === 'completed').length;
+    const handleCompleteAll = () => {
+        setTechnologies(prevTech =>
+            prevTech.map(tech => ({ ...tech, status: 'completed' }))
+        )
+    };
 
-            return Math.round((completed / technologies.length) * 100);
-        };
+    const calculateProgress = () => {
+        if (technologies.length === 0) return 0;
+        const completed = technologies.filter(tech => tech.status === 'completed').length;
 
-        return {
-            technologies,
-            apiLoading,
-            apiError,
-            handleStatusChange,
-            updateTechnologyNotes,
-            handleDeleteTechnology,
-            handleAddTechnology,
-            handleResetAll,
-            handleCompleteAll,
-            importFromApi,
-            progress: calculateProgress()
-        };
-    }
+        return Math.round((completed / technologies.length) * 100);
+    };
 
-    export default useTechnologies;
+    const handleImportTechnologies = (importedTechnologies) => {
+        setTechnologies(prev => [...prev, ...importedTechnologies]);
+    };
+
+
+    return {
+        technologies,
+        apiLoading,
+        apiError,
+        handleStatusChange,
+        updateTechnologyNotes,
+        handleDeleteTechnology,
+        handleAddTechnology,
+        handleResetAll,
+        handleCompleteAll,
+        importFromApi,
+        handleImportTechnologies,
+        progress: calculateProgress()
+    };
+}
+
+export default useTechnologies;

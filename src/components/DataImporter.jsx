@@ -15,41 +15,41 @@ function DataImporter({ onImport, existingTechnologies }) {
     setValidationResult(null);
 
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
       try {
         const data = JSON.parse(e.target.result);
         const result = validateImportData(data);
-        
+
         setValidationResult(result);
-        
+
         if (result.isValid) {
-          setImportStatus({ 
-            type: 'success', 
-            message: `Файл проверен. Найдено ${result.stats.total} технологий. Готово к импорту.` 
+          setImportStatus({
+            type: 'success',
+            message: `Файл проверен. Найдено ${result.stats.total} технологий. Готово к импорту.`
           });
         } else {
-          setImportStatus({ 
-            type: 'error', 
-            message: `Обнаружены ошибки в файле: ${result.errors.length} ошибок, ${result.warnings.length} предупреждений` 
+          setImportStatus({
+            type: 'error',
+            message: `Обнаружены ошибки в файле: ${result.errors.length} ошибок, ${result.warnings.length} предупреждений`
           });
         }
       } catch (error) {
-        setImportStatus({ 
-          type: 'error', 
-          message: 'Ошибка чтения файла. Убедитесь, что файл в формате JSON.' 
+        setImportStatus({
+          type: 'error',
+          message: 'Ошибка чтения файла. Убедитесь, что файл в формате JSON.'
         });
         setValidationResult(null);
       }
     };
-    
+
     reader.onerror = () => {
-      setImportStatus({ 
-        type: 'error', 
-        message: 'Ошибка чтения файла.' 
+      setImportStatus({
+        type: 'error',
+        message: 'Ошибка чтения файла.'
       });
     };
-    
+
     reader.readAsText(file);
   };
 
@@ -58,47 +58,55 @@ function DataImporter({ onImport, existingTechnologies }) {
 
     const file = fileInputRef.current.files[0];
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
       try {
         const data = JSON.parse(e.target.result);
+        console.log('📥 Данные из файла:', data); // ← ДЛЯ ОТЛАДКИ
         const importedTechs = data.technologies.map(tech => {
           const sanitized = sanitizeTechnology(tech);
-          
-          // Проверяем дубликаты по названию
-          const isDuplicate = existingTechnologies.some(
-            existing => existing.title.toLowerCase() === sanitized.title.toLowerCase()
-          );
-          
-          return {
+
+          // Генерируем новый уникальный ID
+          const newTech = {
             ...sanitized,
+            id: Date.now() + Math.random(), // Всегда новый ID
             isFromApi: false,
-            isImported: true,
-            isDuplicate
+            isImported: true
           };
+
+          console.log('🔄 Преобразованная технология:', newTech);
+          return newTech;
         });
 
-        const uniqueTechs = importedTechs.filter(tech => !tech.isDuplicate);
-        const duplicates = importedTechs.filter(tech => tech.isDuplicate);
+        console.log('✅ Все технологии для импорта:', importedTechs);
+        console.log('📊 Существующие технологии:', existingTechnologies);
 
-        onImport(uniqueTechs);
-        
-        setImportStatus({ 
-          type: 'success', 
-          message: `Успешно импортировано ${uniqueTechs.length} технологий. ${duplicates.length} дубликатов пропущено.` 
-        });
-        
+        // Проверяем что функция onImport существует
+        if (typeof onImport === 'function') {
+          onImport(importedTechs);
+          console.log('🎯 Функция onImport вызвана успешно');
+
+          setImportStatus({
+            type: 'success',
+            message: `Успешно импортировано ${importedTechs.length} технологий`
+          });
+        } else {
+          console.error('❌ onImport не является функцией:', onImport);
+          throw new Error('Функция импорта не определена');
+        }
+
         setValidationResult(null);
         fileInputRef.current.value = '';
-        
+
       } catch (error) {
-        setImportStatus({ 
-          type: 'error', 
-          message: 'Ошибка при импорте данных.' 
+        console.error('❌ Ошибка при импорте данных:', error);
+        setImportStatus({
+          type: 'error',
+          message: 'Ошибка при импорте данных.'
         });
       }
     };
-    
+
     reader.readAsText(file);
   };
 
@@ -113,7 +121,7 @@ function DataImporter({ onImport, existingTechnologies }) {
   return (
     <div className="data-importer">
       <h3>📤 Импорт данных</h3>
-      
+
       <div className="import-controls">
         <input
           type="file"
@@ -127,7 +135,7 @@ function DataImporter({ onImport, existingTechnologies }) {
         <label htmlFor="import-file" className="file-label">
           Выберите JSON файл
         </label>
-        
+
         <button
           onClick={handleImport}
           disabled={!validationResult || !validationResult.isValid}
@@ -136,7 +144,7 @@ function DataImporter({ onImport, existingTechnologies }) {
         >
           Импортировать
         </button>
-        
+
         <button
           onClick={resetImport}
           className="reset-import-button"
@@ -147,7 +155,7 @@ function DataImporter({ onImport, existingTechnologies }) {
       </div>
 
       {importStatus.message && (
-        <div 
+        <div
           className={`import-status ${importStatus.type}`}
           role={importStatus.type === 'error' ? 'alert' : 'status'}
           aria-live="polite"
@@ -162,7 +170,7 @@ function DataImporter({ onImport, existingTechnologies }) {
       {validationResult && (
         <div className="validation-results">
           <h4>Результаты проверки:</h4>
-          
+
           {validationResult.warnings.length > 0 && (
             <div className="validation-warnings">
               <strong>Предупреждения ({validationResult.warnings.length}):</strong>
@@ -173,7 +181,7 @@ function DataImporter({ onImport, existingTechnologies }) {
               </ul>
             </div>
           )}
-          
+
           {validationResult.errors.length > 0 && (
             <div className="validation-errors">
               <strong>Ошибки ({validationResult.errors.length}):</strong>
@@ -184,7 +192,7 @@ function DataImporter({ onImport, existingTechnologies }) {
               </ul>
             </div>
           )}
-          
+
           {validationResult.isValid && (
             <div className="validation-success">
               ✅ Файл прошел проверку. Технологий: {validationResult.stats.total}

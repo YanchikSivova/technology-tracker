@@ -15,6 +15,7 @@ function Home() {
         handleResetAll,
         handleCompleteAll,
         importFromApi,
+        handleImportTechnologies,
         progress
     } = useTechnologies();
 
@@ -68,6 +69,7 @@ function Home() {
                     technologies={technologies}
                     onApiImport={handleApiImport}
                     apiLoading={apiLoading}
+                    onImportTechnologies={handleImportTechnologies}
                 />
                 
                     {apiError && (

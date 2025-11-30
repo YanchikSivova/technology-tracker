@@ -1,7 +1,7 @@
 export const validateTechnology = (tech) => {
   const errors = [];
 
-  if (!tech.id || typeof tech.id !== 'string' && typeof tech.id !== 'number') {
+   if (tech.id && (typeof tech.id !== 'string' && typeof tech.id !== 'number')) {
     errors.push('Некорректный ID технологии');
   }
 
@@ -9,16 +9,16 @@ export const validateTechnology = (tech) => {
     errors.push('Название технологии обязательно');
   }
 
-  if (!tech.description || typeof tech.description !== 'string') {
-    errors.push('Описание технологии обязательно');
+  if (tech.description && typeof tech.description !== 'string') {
+    errors.push('Описание должно быть строкой');
   }
 
   if (!tech.status || !['not-started', 'in-progress', 'completed'].includes(tech.status)) {
     errors.push('Некорректный статус технологии');
   }
 
-  if (!tech.category || typeof tech.category !== 'string') {
-    errors.push('Категория технологии обязательна');
+  if (tech.category && typeof tech.category !== 'string') {
+    errors.push('Категория должна быть строкой');
   }
 
   if (tech.notes && typeof tech.notes !== 'string') {
@@ -80,14 +80,18 @@ export const validateImportData = (data) => {
 };
 
 export const sanitizeTechnology = (tech) => {
+  // Всегда генерируем новый ID для импортируемых технологий
+  const newId = Date.now() + Math.random();
+  
   return {
-    id: typeof tech.id === 'number' ? tech.id : Date.now() + Math.random(),
+    id: newId,
     title: String(tech.title || 'Без названия').trim(),
     description: String(tech.description || '').trim(),
     status: ['not-started', 'in-progress', 'completed'].includes(tech.status) ? tech.status : 'not-started',
     category: String(tech.category || 'other').trim(),
     notes: String(tech.notes || '').trim(),
     isFromApi: Boolean(tech.isFromApi),
-    resources: Array.isArray(tech.resources) ? tech.resources : []
+    resources: Array.isArray(tech.resources) ? tech.resources : [],
+    createdAt: tech.createdAt || new Date().toISOString()
   };
 };

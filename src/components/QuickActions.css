@@ -26,7 +26,8 @@
     background-color: var(--color-completed);
 }
 
-.reset-button{
+.reset-button,
+.reset-import-button{
     background-color: var(--color-not-started);
     
 }
