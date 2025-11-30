@@ -1,6 +1,7 @@
 /* базовые стили для приложения */
 :root{
     --color-not-started:#e74c3c; --color-in-progress:#f39c12; --color-completed:#27AE60;
+    --color-completed-rgb:39,174,96; --color-in-progress-rgb:243,156,18; --color-not-started-rgb:231,76,60;
     --color-title:#22313f; --color-primary:#36454f;
     --color-background:#FFFFFF; --color-cards:#ecf0f1;
 
@@ -30,10 +31,15 @@ body {
     color: var(--color-primary);
 }
 .App {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  /* padding: 20px; */
+  font-family: var(--font-primary), var(--font-fallback);
+}
+
+.page{
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: var(--font-primary), var(--font-fallback);
 }
 
 /* стили для заголовка приложения (если используется) */

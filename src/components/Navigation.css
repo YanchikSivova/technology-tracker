@@ -1,0 +1,28 @@
+.main-navigation{
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color-cards);
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+}
+
+.main-navigation a{
+    text-decoration: none;
+    color: var(--color-title);
+}
+
+.main-navigation h2{
+    margin: 0;
+}
+
+.nav-menu{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}

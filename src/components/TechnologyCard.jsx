@@ -27,15 +27,17 @@ function TechnologyCard({ technologies, onStatusChange, onDeleteTechnology, onNo
                                 <p className="description">{technology.description}</p>
                             </span>
                             <div className="status-icon">
-                                    {technology.status === 'not-started' ? '❌' : (technology.status === 'completed' ? '✅' : '⌛️')}
+                                {technology.status === 'not-started' ? '❌' : (technology.status === 'completed' ? '✅' : '⌛️')}
                             </div>
                         </div>
                         <div className='notes-delete__container'>
-                            <TechnologyNotes
-                                notes={technology.notes}
-                                onNotesChange={onNotesChange}
-                                techId={technology.id}
-                            />
+                            <div onClick={(e) => e.stopPropagation()}>
+                                <TechnologyNotes
+                                    notes={technology.notes}
+                                    onNotesChange={onNotesChange}
+                                    techId={technology.id}
+                                />
+                            </div>
                             <button className="delete-button" onClick={(e) => handleDeleteClick(technology.id, e)} title="Удалить технологию">
                                 🗑️
                             </button>

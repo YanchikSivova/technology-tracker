@@ -1,0 +1,11 @@
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    border-radius: var(--radius);
+    padding: 8px 16px;
+}

@@ -1,0 +1,44 @@
+.page-header{
+    margin-block: 40px;
+}
+
+
+.technologies-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.technology-item{
+    background-color: var(--color-cards);
+    border-radius: var(--radius);
+    padding:16px;
+}
+
+.technology-item h3{
+    margin-top: 0;
+}
+
+.technology-meta{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-link{
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.btn{
+    background-color: var(--color-cards);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: var(--radius);
+    color: var(--color-primary);
+    font-size: 20px;
+    margin-top: 20px;
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    justify-self: center;
+}

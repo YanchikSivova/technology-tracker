@@ -1,0 +1,37 @@
+.back-link{
+    text-decoration: none;
+    color: var(--color-primary);
+    font-size: 20px;
+}
+
+.status-buttons{
+    display: flex;
+    gap: 5px;
+}
+
+.status-buttons button{
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 8px 24px;
+    border: none;
+    color: var(--color-background);
+    box-shadow: var(--shadow);
+
+    transition: all 0.3s ease;
+}
+
+.button-not-started{
+    background-color: var(--color-not-started);
+}
+
+.button-in-progress{
+    background-color: var(--color-in-progress);
+}
+
+.button-completed{
+    background-color: var(--color-completed);
+}
+
+.status-buttons button[data-active=false]{
+    opacity: 50%;
+}
