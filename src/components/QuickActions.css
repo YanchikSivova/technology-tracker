@@ -32,3 +32,7 @@
 .export-button{
     background-color: var(--color-in-progress);
 }
+
+.action-buttons button:last-child{
+    background-color: var(--color-in-progress);
+}

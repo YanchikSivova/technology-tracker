@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState } from 'react';
 import useTechnologies from '../hooks/useTechnologies';
 import TechnologyCard from '../components/TechnologyCard';
@@ -8,11 +7,14 @@ import FilterDropdown from '../components/FilterDropdown';
 function Home() {
     const {
         technologies,
+        apiLoading,
+        apiError,
         handleStatusChange,
         updateTechnologyNotes,
         handleDeleteTechnology,
         handleResetAll,
         handleCompleteAll,
+        importFromApi,
         progress
     } = useTechnologies();
 
@@ -41,6 +43,13 @@ function Home() {
         setFilter(newFilter);
     };
 
+    const handleApiImport = async () => {
+        const importedCount = await importFromApi();
+        if (importedCount > 0) {
+            // Можно добавить уведомление или console.log
+            console.log(`Импортировано ${importedCount} технологий`);
+        }
+    };
     return (
         <div className="page">
             <div className="page-header">
@@ -51,11 +60,23 @@ function Home() {
                     animated={true}
                 />
             </div>
-            <QuickActions
-                onCompleteAll={handleCompleteAll}
-                onResetAll={handleResetAll}
-                technologies={technologies}
-            />
+
+            <div className='quick-actions-section'>
+                <QuickActions
+                    onCompleteAll={handleCompleteAll}
+                    onResetAll={handleResetAll}
+                    technologies={technologies}
+                    onApiImport={handleApiImport}
+                    apiLoading={apiLoading}
+                />
+                
+                    {apiError && (
+                        <div className="api-error">
+                            ⚠️ {apiError}
+                        </div>
+                    )}
+               
+            </div>
             <div className='search-box'>
                 <input type='text'
                     placeholder='Поиск технологий'

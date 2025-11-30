@@ -1,7 +1,7 @@
 import './QuickActions.css'
 import { useState } from 'react';
 import Modal from './Modal';
-function QuickActions({ onResetAll, onCompleteAll, technologies }) {
+function QuickActions({ onResetAll, onCompleteAll, technologies, onApiImport, apiLoading }) {
     const [showExportModal, setShowExportModal] = useState(false);
     const handleExport = () => {
         const data = {
@@ -41,6 +41,14 @@ function QuickActions({ onResetAll, onCompleteAll, technologies }) {
                 </button>
                 <button className='export-button' onClick={handleExport}>
                     Экспорт данных
+                </button>
+                {/* Кнопка API импорта можно добавить и здесь */}
+                <button 
+                    className={`api-button ${apiLoading ? 'loading' : ''}`}
+                    onClick={onApiImport}
+                    disabled={apiLoading}
+                >
+                    {apiLoading ? 'Импорт...' : 'Импорт из API'}
                 </button>
             </div>
             <Modal 

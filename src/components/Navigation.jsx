@@ -17,12 +17,12 @@ function Navigation(){
                     </Link>
                 </li>
                 <li>
-                    <Link to='/technologies' className={location.pathname === '/'? 'active': ''}>
+                    <Link to='/technologies' className={location.pathname === '/technologies'? 'active': ''}>
                     Все технологии
                     </Link>
                 </li>
                 <li>
-                    <Link to='/statistics' className={location.pathname === '/'? 'active' : ''}>
+                    <Link to='/statistics' className={location.pathname === '/statistics'? 'active' : ''}>
                     Статистика
                     </Link>
                 </li>
